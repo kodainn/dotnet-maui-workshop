@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodel="clr-namespace:MonkeyFinder.ViewModel"
     x:DataType="viewmodel:MonkeyDetailsViewModel"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
     Title="{Binding Monkey.Name}">
     <ScrollView>
         <Grid RowDefinitions="Auto,Auto,*">
@@ -22,7 +23,7 @@
                     Margin="0,8,0,0"
                     HorizontalOptions="Center"
                     VerticalOptions="Center">
-                    <Image Aspect="AspectFill"
+                <Image Aspect="AspectFill"
                         HeightRequest="160"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
@@ -39,10 +40,17 @@
                    Margin="0,0,0,8"/>
 
             <VerticalStackLayout Grid.Row="2" Padding="10" Spacing="10">
+                <Button Text="Show on Map" 
+                    Command="{Binding OpenMapCommand}"
+                    HorizontalOptions="Center" 
+                    WidthRequest="200" 
+                    Margin="8"
+                    Style="{StaticResource ButtonOutline}"/>
                 <Label Style="{StaticResource MediumLabel}" Text="{Binding Monkey.Details}" />
                 <Label Style="{StaticResource SmallLabel}" Text="{Binding Monkey.Location, StringFormat='Location: {0}'}" />
                 <Label Style="{StaticResource SmallLabel}" Text="{Binding Monkey.Population, StringFormat='Population: {0}'}" />
             </VerticalStackLayout>
+            <Label Style="{StaticResource MediumLabel}" Text="{Binding Monkey.Details}" />
         </Grid>
     </ScrollView>
 </ContentPage>

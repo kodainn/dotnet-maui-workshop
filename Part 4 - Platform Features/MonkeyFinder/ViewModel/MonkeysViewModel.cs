@@ -82,6 +82,18 @@ public partial class MonkeysViewModel : BaseViewModel
                     Timeout = TimeSpan.FromSeconds(30)
                 });
             }
-        } catch
+
+            var first = Monkeys.OrderBy(m => location.CalculateDistance(
+                new Location(m.Latitude, m.Longitude), DistanceUnits.Miles))
+                .FirstOrDefault();
+
+            await Shell.Current.DisplayAlert("", first.Name + " " + first.Location, "OK");
+
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Unable to query location: {ex.Message}");
+            await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
+        }
     }
 }
